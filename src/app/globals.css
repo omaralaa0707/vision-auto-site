@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@theme {
+  /* Vision Auto's hall is rough sandstone washed from below by warm light.
+     The page takes its ground from that stone rather than from their black
+     Instagram tile, and spends their gold only where their own mark does.
+     A cool blue lifted from the cars' cabin screens is the single counterpoint
+     — it belongs to the "lens" idea their name asks for. */
+  --color-stone: #efe8dc;
+  --color-stone-2: #e5dccd;
+  --color-stone-3: #d3c6b1;
+  --color-stone-4: #b7a88e;
+  --color-ink: #17150f;
+  --color-ink-2: #2b271e;
+  --color-umber: #5c5344;
+  --color-gold: #e2b571; /* sampled from their profile mark */
+  --color-gold-deep: #7d5216; /* their gold, darkened until it clears AA on the stone ground (4.9:1) */
+  --color-lens: #3f6d86;
+  --color-lens-soft: #9dbccd;
+
+  --font-display: var(--font-familjen), "Helvetica Neue", sans-serif;
+  --font-body: var(--font-instrument), system-ui, sans-serif;
+  --font-arabic: var(--font-alexandria), "Segoe UI", sans-serif;
+
+  --text-hero: clamp(2.6rem, 7vw, 6.4rem);
+  --text-display: clamp(1.9rem, 4.2vw, 3.6rem);
+  --text-section: clamp(1.3rem, 2.4vw, 2rem);
+  --text-lead: clamp(1rem, 1.2vw, 1.18rem);
+}
+
+@layer base {
+  html {
+    background: var(--color-stone);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic);
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lens);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The stone wall, abstracted: a fine warm grain plus the low light-wash their
+   hall gets from the strip at the base of the wall. */
+@utility stone-field {
+  background-image:
+    radial-gradient(
+      120% 90% at 50% 118%,
+      color-mix(in oklab, var(--color-gold) 26%, transparent),
+      transparent 62%
+    ),
+    repeating-linear-gradient(
+      93deg,
+      color-mix(in oklab, var(--color-stone-4) 7%, transparent) 0 1px,
+      transparent 1px 11px
+    );
+}
+
+/* Vision Auto's own collateral sets the deposit and the instalment side by
+   side in a boxed plate. This is that plate. */
+@utility plate {
+  border: 1px solid color-mix(in oklab, var(--color-ink) 16%, transparent);
+  background: color-mix(in oklab, var(--color-stone-2) 70%, white);
+}
+
+/*
+ * Motion signature: nothing slides in. Everything *resolves* — out of focus
+ * and slightly oversized, pulling to sharp, the way the hero lens behaves.
+ */
+@keyframes resolve {
+  from {
+    opacity: 0;
+    filter: blur(13px);
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes aperture {
+  from {
+    clip-path: circle(0% at 50% 50%);
+  }
+  to {
+    clip-path: circle(78% at 50% 50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes resolve {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes aperture {
+    from {
+      clip-path: none;
+    }
+    to {
+      clip-path: none;
+    }
+  }
+}
+
+@utility hair-gold {
+  background: linear-gradient(90deg, transparent, var(--color-gold-deep), transparent);
+}
+
+/* Arabic corrections, unlayered so they outrank the utilities. Keyed off
+   [dir], never [lang]: browser translation rewrites lang and breaks this. */
+html[dir="rtl"] .font-display {
+  font-family: var(--font-arabic);
+  letter-spacing: 0;
+  font-style: normal;
+}
+
+html[dir="rtl"] .text-hero {
+  font-size: clamp(1.95rem, 5.6vw, 4.9rem);
+  line-height: 1.35;
+}
+
+html[dir="rtl"] .text-display {
+  font-size: clamp(1.55rem, 3.5vw, 2.9rem);
+  line-height: 1.4;
+}
+
+html[dir="rtl"] .text-section {
+  font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+  line-height: 1.45;
+}
+
+html[dir="rtl"] [class*="tracking-["] {
+  letter-spacing: 0;
+}
+
+/* The Latin display face is set in italic to echo their oblique wordmark;
+   Arabic has no such italic, so it must not inherit the skew. */
+html[dir="rtl"] .italic {
+  font-style: normal;
+}
