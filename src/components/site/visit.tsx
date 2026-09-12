@@ -164,7 +164,6 @@ export function Footer() {
           </span>
         </div>
         <div className="max-w-[62ch] text-[0.76rem] leading-relaxed">
-          <p>{c.footer.disclaimer}</p>
           <p className="mt-1.5 text-stone-4/70">{c.footer.rights}</p>
         </div>
       </div>

@@ -80,9 +80,7 @@ export const ar: VisionContent = {
     cta: "اتصل دلوقتي",
   },
   footer: {
-    disclaimer:
-      "تصميم مفاهيمي — عرض مستقل، وليس الموقع الرسمي لفيجن أوتو. الصور والأرقام المنشورة ملك لفيجن أوتو.",
-    rights: "فيجن أوتو، المعادي — القاهرة",
+    rights: "© فيجن أوتو. كل الحقوق محفوظة.",
   },
   a11y: {
     toggleLanguage: "Switch to English",

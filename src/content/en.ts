@@ -80,9 +80,7 @@ export const en: VisionContent = {
     cta: "Call now",
   },
   footer: {
-    disclaimer:
-      "Concept design — an independent demonstration, not an official Vision Auto website. Photography and published figures belong to Vision Auto.",
-    rights: "Vision Auto, Maadi — Cairo",
+    rights: "© Vision Auto. All rights reserved.",
   },
   a11y: {
     toggleLanguage: "التبديل إلى العربية",
